@@ -1,3 +1,5 @@
+org: elham
+app: auth-server
 # Welcome to Serverless!
 #
 # This file is the main config file for your service.
@@ -70,6 +72,7 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
+          
   getAccessToken:
     handler: handler.getAccessToken
     events:
