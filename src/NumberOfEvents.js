@@ -15,6 +15,8 @@ class NumberOfEvents extends Component {
     render() {
         return (
             <div>
+                
+
                 <input 
                     type="number"
                     className="displaylimit"

@@ -1,3 +1,4 @@
+import { mockData } from "./mock-data";
 
 /**
  *
@@ -27,13 +28,26 @@ export const extractBasicInfo = (event) => {
 
 export const extractEventDetails = (event) => {
     var detailInfo = {
-        'time': event.start.dateTime, 
-        'timezone': event.start.timeZone, 
         'summary': event.summary,
-        'location': event.location, 
-        'link': event.htmlLink,
+        'start': {
+            'dateTime': event.start.dateTime, 
+            'timeZone': event.start.timeZone
+        }, 
+        'location': event.location,
+        'htmlLink': event.htmlLink,
         'description': event.description
+
+
+        // 'time': event.start.dateTime, 
+        // 'timezone': event.start.timeZone, 
+        // 'summary': event.summary,
+        // 'location': event.location, 
+        // 'link': event.htmlLink,
+        // 'description': event.description
     }   
     return detailInfo   
 };
 
+export const getEvents = async() => {
+    return mockData;
+};

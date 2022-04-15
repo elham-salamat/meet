@@ -4,49 +4,50 @@ import { mockData } from './mock-data';
 
 class Event extends Component {
     state = {
-        // eventInfo: extractBasicInfo(mockData[0])
-        eventInfo: {}
-    };
-   
-
-    handleButtonClicked = (detailInfo) => {
-        this.setState({
-            eventInfo: detailInfo
-        });
+        collapsed: true
     }
 
+    handleClick = () => {
+        this.setState({
+          collapsed: !this.state.collapsed,
+        });
+    };
+
     render() {
-
-        const basicInfo = (eventInfo) => {
-            const basicInfo = [];
-
-            for (const [key, value] of Object.entries(eventInfo)) {
-                basicInfo.push({key, value});
-            }
-            return basicInfo
-        }
-
-        // const detailInfo = () => {
-        //     extractEventDetails(mockData[0])
-        // }
+        const { event } = this.props;
+        const { collapsed } = this.state;
 
         return (             
             <div className="event">
-                <div className="BasicInfo">
-                {basicInfo(this.state.eventInfo).map((item) => (
-                        <li
-                            key={item.key}
-                        >
-                            {item.value}
-                        </li>  
-                ))}
+                <h1 className="summary">{event.summary}</h1>
+                <p className="date">{event.start.dateTime} | ({event.start.timeZone})</p>
+                <p className="location">{event.location}</p>
+                <div>
+                    {collapsed ? (
+                    <button                     
+                        type="button"
+                        className="button"
+                        onClick={this.handleClick}
+                    >                     
+                        Show details
+                    </button>
+                    ) : (
+                    <div>
+                        <h2>About event:</h2>
+                        <a href={event.htmlLink} target='_blank' rel='noreferrer'>
+                            See details on Google Calendar
+                        </a>
+                        <p className="description">{event.description}</p>
+                        <button                     
+                            type="button"
+                            className="button"
+                            onClick={this.handleClick}
+                        >                     
+                            Hide details
+                        </button>
+                    </div>
+                    )}
                 </div>
-                <button                     
-                    type="button"
-                    className="button"
-                    onClick={this.handleButtonClicked(extractEventDetails(mockData[0]))}>                     
-                        show details
-                </button>
             </div>
         )
     }
