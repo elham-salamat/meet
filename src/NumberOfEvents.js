@@ -2,26 +2,30 @@ import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
     state = {
-        number: null 
+        eventCount: 32 
     };
 
-    handleDisplayLimitChanged = (event) => {
+    handleCountChanged = (event) => {
         const value = event.target.value;
         this.setState({
-            number: value
+            eventCount: value
         })
+        
+        this.props.updateEventsCount(value)
     }
 
     render() {
         return (
             <div>
                 
-
+                <lable>
+                    Number of Events
+                </lable>
                 <input 
                     type="number"
-                    className="displaylimit"
-                    value={this.state.number}
-                    onChange={this.handleDisplayLimitChanged}
+                    className="count"
+                    value={this.state.eventCount}
+                    onChange={this.handleCountChanged}
                 />
 
             </div>

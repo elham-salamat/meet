@@ -25,6 +25,7 @@ describe('<App /> component', () => {
     test('render NumberOfEvents', () => {
         expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
     });
+
     
 });
 
@@ -61,5 +62,37 @@ describe('<App /> integration', () => {
         AppWrapper.unmount();
       });
 
+    test('get list of all events when user selects "See all cities"', async() => {
+        const AppWrapper = mount(<App />);
+        const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
+        await suggestionItems.at(suggestionItems.length -1).simulate('click');
+        const allEvents = await getEvents();
+        expect(AppWrapper.state('events')).toEqual(allEvents);
+        AppWrapper.unmount();
+    });
+
+    test('display the number of events matching the eventCount selected by the user', async () => {
+        const AppWrapper = mount(<App />);
+        const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+        NumberOfEventsWrapper.find(".count").simulate("change", {
+            target: {value: 4},
+        });
+        const eventsCount = NumberOfEventsWrapper.state('eventCount');
+        await NumberOfEventsWrapper.instance().handleCountChanged;
+        expect(AppWrapper.state('numberOfEvents')).toEqual(eventsCount);
+        AppWrapper.unmount();
+    });
+
+    test('setting events state matching the numberOfEvents state', async () => {
+        const AppWrapper = mount(<App />);
+        AppWrapper.setState({
+            numberOfEvents: 1})
+        const numberOfEvents = AppWrapper.state('numberOfEvents');
+        const selectedCity = 'all';
+        await AppWrapper.instance().updateEvents(selectedCity, numberOfEvents);
+        expect(AppWrapper.state('events').length).toEqual(numberOfEvents);
+        AppWrapper.unmount();
+    });
+     
 });
 
