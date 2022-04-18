@@ -1,15 +1,6 @@
 import { mockData } from "./mock-data";
 import axios from 'axios';
 import NProgress from 'nprogress';
-/**
- *
- * @param {*} events:
- * The following function should be in the “api.js” file.
- * This function takes an events array, then uses map to create a new array with only locations.
- * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
- * The Set will remove all duplicates from the array.
- */
-
 
 export const extractLocations = (events) => {
     var extractLocations = events.map((event) => event.location);
@@ -29,6 +20,20 @@ export const extractEventDetails = (event) => {
         'description': event.description
     }   
     return detailInfo   
+};
+
+const removeQuery = () => {
+    if (window.history.pushState && window.location.pathname) {
+      var newurl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname;
+      window.history.pushState("", "", newurl);
+    } else {
+      newurl = window.location.protocol + "//" + window.location.host;
+      window.history.pushState("", "", newurl);
+    }
 };
 
 const checkToken = async (accessToken) => {
@@ -56,8 +61,8 @@ export const getEvents = async() => {
         const result = await axios.get(url);
         if (result.data) {
             var locations = extractLocations(result.data.events);
-            localStorage.setItem("lastEvents", JSON.stringify(result.data));
-            localStorage.setItem("locations", JSON.stringify(locations));
+            localStorage.setItem('lastEvents', JSON.stringify(result.data));
+            localStorage.setItem('locations', JSON.stringify(locations));
         }
         NProgress.done();
         return result.data.events;
@@ -95,7 +100,7 @@ const getToken = async (code) => {
       })
       .catch((error) => error);
   
-    access_token && localStorage.setItem("access_token", access_token);
+    access_token && localStorage.setItem('access_token', access_token);
   
     return access_token;
 };
