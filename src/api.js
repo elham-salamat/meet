@@ -22,21 +22,7 @@ export const extractEventDetails = (event) => {
     return detailInfo   
 };
 
-const removeQuery = () => {
-    if (window.history.pushState && window.location.pathname) {
-      var newurl =
-        window.location.protocol +
-        "//" +
-        window.location.host +
-        window.location.pathname;
-      window.history.pushState("", "", newurl);
-    } else {
-      newurl = window.location.protocol + "//" + window.location.host;
-      window.history.pushState("", "", newurl);
-    }
-};
-
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
     const result = await fetch(
       `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
     )
@@ -45,6 +31,35 @@ const checkToken = async (accessToken) => {
   
     return result;
 }; 
+
+const getToken = async (code) => {
+  const encodeCode = encodeURIComponent(code);
+  const { access_token } = await fetch(
+    `https://u6pnlej1r8.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => error);
+
+  access_token && localStorage.setItem('access_token', access_token);
+
+  return access_token;
+};
+
+const removeQuery = () => {
+  if (window.history.pushState && window.location.pathname) {
+    var newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
+    window.history.pushState("", "", newurl);
+  } else {
+    newurl = window.location.protocol + "//" + window.location.host;
+    window.history.pushState("", "", newurl);
+  }
+};
 
 export const getEvents = async() => {
     NProgress.start(); 
@@ -57,7 +72,7 @@ export const getEvents = async() => {
 
     if (token) {
         removeQuery();
-        const url = 'https://u6pnlej1r8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+        const url = `https://u6pnlej1r8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
         const result = await axios.get(url);
         if (result.data) {
             var locations = extractLocations(result.data.events);
@@ -90,18 +105,4 @@ export const getAccessToken = async() => {
     return accessToken;
 }
 
-const getToken = async (code) => {
-    const encodeCode = encodeURIComponent(code);
-    const { access_token } = await fetch(
-      'https://u6pnlej1r8.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => error);
-  
-    access_token && localStorage.setItem('access_token', access_token);
-  
-    return access_token;
-};
 

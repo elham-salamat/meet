@@ -18,9 +18,9 @@ class NumberOfEvents extends Component {
         return (
             <div>
                 
-                <lable>
+                <label>
                     Number of Events
-                </lable>
+                </label>
                 <input 
                     type="number"
                     className="count"

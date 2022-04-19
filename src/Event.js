@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { extractBasicInfo, extractEventDetails } from './api';
-import { mockData } from './mock-data';
 
 class Event extends Component {
     state = {
@@ -26,21 +24,21 @@ class Event extends Component {
                     {collapsed ? (
                     <button                     
                         type="button"
-                        className="button"
+                        className="button showDetails"
                         onClick={this.handleClick}
                     >                     
                         Show details
                     </button>
                     ) : (
-                    <div>
+                    <div className="event__Details">
                         <h2>About event:</h2>
-                        <a href={event.htmlLink} target='_blank' rel='noreferrer'>
+                        <a href={event.htmlLink} target='_blank' rel='noopener noreferrer'>
                             See details on Google Calendar
                         </a>
                         <p className="description">{event.description}</p>
                         <button                     
                             type="button"
-                            className="button"
+                            className="button hideDetails"
                             onClick={this.handleClick}
                         >                     
                             Hide details

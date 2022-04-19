@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
-import { extractBasicInfo, extractEventDetails } from '../api';
+import { extractEventDetails } from '../api';
 import { mockData } from '../mock-data';
 
 
