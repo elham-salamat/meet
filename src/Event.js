@@ -24,7 +24,7 @@ class Event extends Component {
                     {collapsed ? (
                     <button                     
                         type="button"
-                        className="button showDetails"
+                        className="button"
                         onClick={this.handleClick}
                     >                     
                         Show details
@@ -38,7 +38,7 @@ class Event extends Component {
                         <p className="description">{event.description}</p>
                         <button                     
                             type="button"
-                            className="button hideDetails"
+                            className="button"
                             onClick={this.handleClick}
                         >                     
                             Hide details

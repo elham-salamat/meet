@@ -50,7 +50,7 @@ defineFeature(feature, test => {
           AppWrapper.find('.city').simulate('change', { target: { value: 'Berlin' } });
         });
 
-        and('the list of sugessted cities is showing', () => {
+        and('the list of suggested cities is showing', () => {
             AppWrapper.update();
             expect(AppWrapper.find('.suggestions li')).toHaveLength(2);
         });
