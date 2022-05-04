@@ -68,8 +68,11 @@ export const getEvents = async() => {
         return mockData;
     }
 
-    const token = await getAccessToken();
 
+    const token = await getAccessToken();
+    
+    console.log(token); 
+    
     if (token) {
         removeQuery();
         const url = `https://u6pnlej1r8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;

@@ -11,6 +11,7 @@ class NumberOfEvents extends Component {
 
         if (value < 1 || value > 32) {
             this.setState({
+                eventCount: value,
                 errorText: 'Please choose a number between 1 and 32'
             })            
         } else {
@@ -19,9 +20,9 @@ class NumberOfEvents extends Component {
                 errorText: ''
             })
         }
-
-        
+            
         this.props.updateEventsCount(value)
+
     }
 
     render() {
