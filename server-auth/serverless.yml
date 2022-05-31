@@ -13,7 +13,7 @@
 #
 # Happy Coding!
 
-service: auth-server
+service: server-auth
 
 
 frameworkVersion: "3"
@@ -74,7 +74,7 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
-          
+
   getAccessToken:
     handler: handler.getAccessToken
     events:
@@ -88,6 +88,8 @@ functions:
       - http:
           path: api/get-events/{access-token}
           method: get
+
+          
 
 
 #      - websocket: $connect
