@@ -50,7 +50,7 @@
         const resultElement = document.getElementById("result");
         const resultLink = document.getElementById("authURL");
         // Replace this with your own endpoint
-        const getAuthURL = "https://gjvhsc2s9l.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
+        const getAuthURL = "https://b7suffxx2c.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
   
         getCodeElement.onclick = function () {
           fetch(getAuthURL)
@@ -70,7 +70,7 @@
         const getAccessToken = document.getElementById("getToken");
         const accessTokenElement = document.getElementById("accessToken");
         const getToken =
-            "https://gjvhsc2s9l.execute-api.eu-central-1.amazonaws.com/dev/api/token";
+            "https://b7suffxx2c.execute-api.eu-central-1.amazonaws.com/dev/api/token";
 
         getAccessToken.onclick = function () {
             let code = codeValue.value;
@@ -90,7 +90,7 @@
         };
         const getEvents = document.getElementById("getEvents");
         const events = document.getElementById("events");
-        const getCalendarEvents = "https://gjvhsc2s9l.execute-api.eu-central-1.amazonaws.com/dev/api/get-events";
+        const getCalendarEvents = "https://b7suffxx2c.execute-api.eu-central-1.amazonaws.com/dev/api/get-events";
 
         getEvents.onclick = function () {
           const { access_token } = JSON.parse(accessTokenElement.innerText);

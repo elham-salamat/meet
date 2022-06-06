@@ -113,3 +113,5 @@ So that I will have an overview of what is happening around.
 __Given__ the user opens the app
 __When__ the main page is displayed
 __Then__ a scatter chart shows the number of upcoming events for each certain city. 
+
+
