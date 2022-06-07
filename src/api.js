@@ -1,5 +1,5 @@
 import axios from 'axios'
-import NProgress from 'nprogress'
+// import NProgress from 'nprogress'
 import { mockData } from './mock-data'
 
 export const extractLocations = (events) => {
@@ -79,16 +79,16 @@ const getToken = async (code) => {
   return access_token
 }
 
-const removeQuery = () => {
-  if (window.history.pushState && window.location.pathname) {
-    var newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
-    window.history.pushState("", "", newurl);
-  } else {
-    newurl = window.location.protocol + "//" + window.location.host;
-    window.history.pushState("", "", newurl);
-  }
-}
+// const removeQuery = () => {
+//   if (window.history.pushState && window.location.pathname) {
+//     var newurl =
+//       window.location.protocol +
+//       "//" +
+//       window.location.host +
+//       window.location.pathname;
+//     window.history.pushState("", "", newurl);
+//   } else {
+//     newurl = window.location.protocol + "//" + window.location.host;
+//     window.history.pushState("", "", newurl);
+//   }
+// }
